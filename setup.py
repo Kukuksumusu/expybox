@@ -8,8 +8,8 @@ setup(
     description='Jupyter notebook toolbox for model interpretability/explainability',  # Give a short description about your library
     author='Jakub Štercl',  # Type in your name
     author_email='stercjak@fit.cvut.cz',  # Type in your E-Mail
-    url='https://github.com/user/reponame',  # Provide either the link to your github or to your website
-    download_url='https://github.com/user/reponame/archive/v_01.tar.gz',  # I explain this later on
+    url='https://github.com/Kukuksumusu/expybox',  # Provide either the link to your github or to your website
+    download_url='https://github.com/Kukuksumusu/expybox/archive/0.0.1.tar.gz',  # I explain this later on
     # keywords=['SOME', 'MEANINGFULL', 'KEYWORDS'],  # Keywords that define your package best
     install_requires=[  # I get to this in a second
         'shap',
