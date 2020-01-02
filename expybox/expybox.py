@@ -70,7 +70,7 @@ class ExpyBox:
         # find out how many classes are there if this is classification
         self.class_count = 1
         if self.mode == 'classification':
-            self.class_count = self.predict_function(self.X_train[0, :]).shape[0]
+            self.class_count = self.predict_function(self.X_train[0, :].reshape(1, -1)).shape[0]
 
         self.class_names = class_names or [i for i in range(self.class_count)]
 
