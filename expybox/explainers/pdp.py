@@ -16,6 +16,8 @@ class PDP(Explainer):
         'PDPbox on GitHub': 'https://github.com/SauceCat/PDPbox'
     }
 
+    require_instance = False
+
     def __init__(self, train_data: np.array, predict_function: Callable, globals_options: dict.keys,
                  feature_names: List[str]):
         self.X_train = train_data
@@ -246,7 +248,7 @@ class PDP(Explainer):
 
         return options_map, grid
 
-    def explain_model(self, options):
+    def explain(self, options, instance=None):
         # create dummy object with predict function to pose as a model
         class Model:
             def __init__(self, predict_function: Callable):

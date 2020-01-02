@@ -18,6 +18,8 @@ class Lime(Explainer):
             'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html'
     }
 
+    require_instance = True
+
     def __init__(self, train_data: np.array, predict_function: Callable, mode: str,
                  globals_options: dict.keys, feature_names: List[str],
                  categorical_names: Optional[Dict[int, str]] = None, class_names: Optional[List[str]] = None):
@@ -150,7 +152,9 @@ class Lime(Explainer):
 
         return options_map, grid
 
-    def explain_instance(self, options, instance):
+    def explain(self, options, instance=None):
+        if instance is None:
+            raise ValueError("Instance was not provided")
         explainer = LimeTabularExplainer(training_data=self.X_train,
                                          feature_names=self.feature_names,
                                          mode=self.mode,

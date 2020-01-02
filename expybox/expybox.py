@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from IPython.display import display
 from ipywidgets import Dropdown, GridspecLayout, FloatText, widgets, Accordion, Tab, \
-    interact_manual, fixed, VBox, Layout, HTML, Box, Widget, Button
+    interact_manual, fixed, VBox, Layout, HTML, Box, Widget, Button, ValueWidget
 from .utils.utils import UpdatingCombobox
 from .explainers.anchors import Anchors
 from .explainers.explainer import Explainer
@@ -194,18 +194,23 @@ class ExpyBox:
             )
         return VBox(widget_list)
 
-    def _build_instance_and_call(self, instance_widgets: List[Widget], options: Dict[str, Widget],
-                                 call: Callable) -> None:
+    def _build_instance_and_call(self, options: Dict[str, ValueWidget],
+                                 call: Callable,
+                                 instance_widgets: Optional[List[ValueWidget]] = None) -> None:
         """
         Build instance from instance_widgets values, transform options from widgets to their values (including lookup
         from Jupyter kernel) and then call provided callable
-        :param instance_widgets: List of widgets used for instance creation (should be of len(#features))
         :param options: Dictionary str: widget. Will be transformed to not contain widgets but actual values and passed
         to the callable specified in call.
         :param call: Callable to call after instance is built and options transformed. Will pass (options, instance).
+        :param instance_widgets: List of widgets used for instance creation (should be of len(#features))
+            if none, instance passed to call will be None
         :return: None
         """
-        inst = pd.Series([x.value for x in instance_widgets], index=self.feature_names)
+        if instance_widgets is None:
+            inst = None
+        else:
+            inst = pd.Series([x.value for x in instance_widgets], index=self.feature_names)
         options = options.copy()
         for key, val in options.items():
             if hasattr(val, 'lookup_in_kernel') and val.lookup_in_kernel:
@@ -213,23 +218,6 @@ class ExpyBox:
             else:
                 options[key] = val.value
         call(options, inst)
-
-    def _extract_options_and_call(self, options: Dict[str, Widget], call: Callable) -> None:
-        """
-        Transform options from widgets to their values (including lookup from Jupyter kernel) and then call
-        provided callable
-        :param options: Dictionary str: widget. Will be transformed to not contain widgets but actual values and passed
-        to the callable specified in call.
-        :param call: Callable to call after instance is built and options transformed. Will pass (options, instance).
-        :return: None
-        """
-        options = options.copy()
-        for key, val in options.items():
-            if hasattr(val, 'lookup_in_kernel') and val.lookup_in_kernel:
-                options[key] = self._get_variable_from_kernel(val.value)
-            else:
-                options[key] = val.value
-        call(options)
 
     def _get_variable_from_kernel(self, variable_name: str) -> Any:
         """
@@ -281,21 +269,23 @@ class ExpyBox:
             instance_widget_list, instance_creation_grid = self._build_instance_creation_widgets()
             display(self._build_tabs(resources=explainer.resources, options_box=options_grid,
                                      instance_creation=instance_creation_grid))
-            interact_manual(self._build_instance_and_call, instance_widgets=fixed(instance_widget_list),
-                            options=fixed(options_map), call=fixed(explainer.explain_instance))
+            interact_manual(self._build_instance_and_call, options=fixed(options_map),
+                            call=fixed(explainer.explain), instance_widgets=fixed(instance_widget_list))
         else:
             display(self._build_tabs(resources=explainer.resources, options_box=options_grid))
-            interact_manual(self._extract_options_and_call, options=fixed(options_map),
-                            call=fixed(explainer.explain_model))
+            interact_manual(self._build_instance_and_call, options=fixed(options_map),
+                            call=fixed(explainer.explain), instance_widgets=fixed(None))
 
     def pdplot(self) -> None:
         """
         Create dialog for partial dependence plot
         :return: None
         """
-        pdp = PDP(train_data=self.X_train, predict_function=self.predict_function, feature_names=self.feature_names,
+        pdp = PDP(train_data=self.X_train,
+                  predict_function=self.predict_function,
+                  feature_names=self.feature_names,
                   globals_options=self.kernel_globals.keys())
-        self._display_interact(explainer=pdp, explain_instance=False)
+        self._display_interact(explainer=pdp, explain_instance=pdp.require_instance)
 
     def lime(self):
         """
@@ -309,7 +299,7 @@ class ExpyBox:
                     feature_names=self.feature_names,
                     categorical_names=self.categorical_names,
                     class_names=self.class_names)
-        self._display_interact(explainer=lime, explain_instance=True)
+        self._display_interact(explainer=lime, explain_instance=lime.require_instance)
 
     def anchors(self):
         """
@@ -323,7 +313,7 @@ class ExpyBox:
                           categorical_names=self.categorical_names,
                           is_classification=True if self.mode == 'classification' else False
                           )
-        self._display_interact(explainer=anchors, explain_instance=True)
+        self._display_interact(explainer=anchors, explain_instance=anchors.require_instance)
 
     def shap(self) -> None:
         """
@@ -337,7 +327,7 @@ class ExpyBox:
                     is_classification=True if self.mode == 'classification' else False,
                     class_names=self.class_names
                     )
-        self._display_interact(explainer=shap, explain_instance=True)
+        self._display_interact(explainer=shap, explain_instance=shap.require_instance)
 
     def shap_feature_importance(self):
         """
@@ -351,4 +341,4 @@ class ExpyBox:
                       is_classification=True if self.mode == 'classification' else False,
                       class_names=self.class_names
                       )
-        self._display_interact(explainer=shap, explain_instance=False)
+        self._display_interact(explainer=shap, explain_instance=shap.require_instance)

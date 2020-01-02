@@ -1,4 +1,4 @@
-from typing import Dict, Any, Tuple
+from typing import Dict, Any, Tuple, Optional
 from ipywidgets import Widget, Box
 from numpy import array
 
@@ -10,7 +10,13 @@ class Explainer:
     resources = {}
     """
     Each explainer should provide its dict of resources {Description (str): link (str)}
-    These will be shown in the 'Resources' tab
+    These will be shown in the 'Resources' tab.
+    """
+    require_instance = False
+    """
+    This parameter tells the ExpyBox if the method requires an instance for explanation.
+    If True, the explain method will be called with valid instance (i.e. not None) and user will be offered a form to
+    build such instance.
     """
 
     def build_options(self) -> Tuple[Dict[str, Widget], Box]:
@@ -24,24 +30,10 @@ class Explainer:
         """
         pass
 
-    def explain_model(self, options: Dict[str, Any]) -> None:
+    def explain(self, options: Dict[str, Any], instance: Optional[array] = None) -> None:
         """
-        Explain the whole model, if the method supports it. This method is called if we don't provide an instance to be
-        explained.
-        If the method the subclass is implementing doesn't support such explanation of model, it can either fail
-        (raise an Exception) or just not implement it, i.e. just pass.
-        :param options: dictionary of options {str: Any} with values based on what build_options method returned as
-        the first value in returned tuple (see documentation of build_options).
-        :return: None
-        """
-        pass
-
-    def explain_instance(self, options: Dict[str, Any], instance: array) -> None:
-        """
-        Explain the given instance, if the method supports it. This method is called when we provide an instance to be
-        explained.
-        If the method the subclass is implementing doesn't support such explanation of model, it can either fail
-        (raise an Exception) or just not implement it, i.e. just pass.
+        Run the explanataion and show result in notebook. If self.require_instance is True instance to explain will be
+        passed otherwise None is passed
         :param options: dictionary of options {str: Any} with values based on what build_options method returned as
         the first value in returned tuple (see documentation of build_options).
         :param instance: numpy array with shape (1, #features) representing the single instance to explain

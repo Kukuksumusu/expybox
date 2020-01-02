@@ -19,6 +19,8 @@ class Shap(Explainer):
             'https://github.com/slundberg/shap/blob/master/shap/plots/decision.py#L216',
     }
 
+    require_instance = True
+
     def __init__(self, train_data: np.array, predict_function: Callable, globals_options: dict.keys,
                  feature_names: List[str], is_classification: bool = True, class_names: Optional[List[str]] = None):
         self.X_train = train_data
@@ -167,7 +169,11 @@ class Shap(Explainer):
 
         return options_map, grid
 
-    def explain_instance(self, options, instance):
+    def explain(self, options, instance=None):
+
+        if instance is None:
+            raise ValueError("Instance was not provided")
+
         initjs()
         instance = instance.to_numpy()
         data = self._kmeans(options['kmeans_count']) \
@@ -228,6 +234,8 @@ class ShapFI(Shap):
             'https://github.com/slundberg/shap/blob/master/shap/plots/summary.py#L18'
     }
 
+    require_instance = False
+
     def build_options(self):
         options_map, options_grid = super().build_options()
         # remove unnecessary dropdown with plot selection
@@ -249,7 +257,7 @@ class ShapFI(Shap):
 
         return options_map, options_grid
 
-    def explain_model(self, options):
+    def explain(self, options, instance=None):
         initjs()
         background_data = self._kmeans(options['kmeans_count']) \
             if options['background_data'] == 'kmeans' else options['data']

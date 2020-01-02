@@ -15,6 +15,8 @@ class Anchors(Explainer):
 
     }
 
+    require_instance = True
+
     def __init__(self, train_data: np.array, predict_function: Callable, globals_options: dict.keys,
                  feature_names: List[str], categorical_names: Dict[int, str], is_classification: bool = True):
         self.predict_function = predict_function
@@ -116,7 +118,9 @@ class Anchors(Explainer):
 
         return options_map, grid
 
-    def explain_instance(self, options, instance):
+    def explain(self, options, instance=None):
+        if instance is None:
+            raise ValueError("Instance was not provided")
         explainer = AnchorTabular(predict_fn=self.predict_function, feature_names=self.feature_names,
                                   categorical_names=self.categorical_names)
         if options['disc_perc'] is None:
