@@ -248,8 +248,11 @@ class ShapFI(Shap):
 
         # and with class_to_explain (if it exists)
         if self.is_classification:
-            options_map['class_to_explain'].layout.visibility = 'hidden'
-            del options_map['class_to_explain']
+            # only the assignment triggers actual change of the widget (and only if it's not the original dict)
+            options = options_map['class_to_explain'].options.copy()
+            options['All'] = -1
+            options_map['class_to_explain'].options = options
+            options_map['class_to_explain'].value = -1
 
         # sample_size
         sample_size = BoundedIntText(
@@ -284,9 +287,15 @@ class ShapFI(Shap):
             nsamples=nsamples,
             l1_reg=options['l1_reg']
         )
+
+        # limit to only selected class (if any was selected)
+        if options['class_to_explain'] != -1:
+            shap_values = shap_values[options['class_to_explain']]
+
         summary_plot(
             shap_values=shap_values,
             features=data,
             feature_names=self.feature_names,
-            plot_type='bar'
+            plot_type='bar',
+            class_names=self.class_names
         )
