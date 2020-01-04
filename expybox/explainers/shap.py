@@ -192,10 +192,13 @@ class Shap(Explainer):
         )
         if self.is_classification:
             shap_values = shap_values[options['class_to_explain']]
+            base_value = explainer.expected_value[[options['class_to_explain']]]
+        else:
+            base_value = explainer.expected_value
 
         if options['plot_type'] == 'force' or options['plot_type'] == 'both':
             display(force_plot(
-                base_value=explainer.expected_value,
+                base_value=base_value,
                 shap_values=shap_values,
                 features=instance,
                 feature_names=self.feature_names,
@@ -205,7 +208,7 @@ class Shap(Explainer):
 
         if options['plot_type'] == 'decision' or options['plot_type'] == 'both':
             decision_plot(
-                base_value=explainer.expected_value,
+                base_value=base_value,
                 shap_values=shap_values,
                 features=instance,
                 feature_names=list(self.feature_names),
@@ -243,6 +246,11 @@ class ShapFI(Shap):
         options_map['plot_type'].layout.visibility = 'hidden'
         del options_map['plot_type']
 
+        # and with class_to_explain (if it exists)
+        if self.is_classification:
+            options_map['class_to_explain'].layout.visibility = 'hidden'
+            del options_map['class_to_explain']
+
         # sample_size
         sample_size = BoundedIntText(
             min=1,
@@ -270,6 +278,7 @@ class ShapFI(Shap):
         )
         # create sample from train data
         data = self.X_train[np.random.choice(self.X_train.shape[0], size=options['sample_size'], replace=False), :]
+
         shap_values = explainer.shap_values(
             X=data,
             nsamples=nsamples,
