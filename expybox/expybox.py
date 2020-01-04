@@ -18,33 +18,32 @@ class ExpyBox:
     """
     Main class to instantiate and hold global data like predict_function, train_data and so on.
 
-    :param train_data: numpy array or pandas dataframe of shape (#instances, #features)
+    :param train_data: ``numpy array or pandas dataframe of shape (#instances, #features)``
         Data used to explain models (for methods that require data)
         and to offer instances from (when building instance).
         Categorical features need to be label_encoded into integers starting from 0.
         One-hot encoding is not currently supported.
-    :param predict_function: Callable
-
+    :param predict_function: ``Callable``
         Predict function of a model.
         In case of classification it should return probabilities of classes for each class.
         **Needs** to be able to deal with numpy array with shape (#instances, #features). If that's not the case for
         your model, I recommend writing a wrapper function and pass that one.
-    :param kernel_globals: dict
+    :param kernel_globals: ``dict``
         A dictionary with name_of_variable: variable (**NOT** its value!) from your kernel.
         Used to enable passing variable declared in your Jupyter notebook as a value to certain fields.
         You can either create this dictionary yourself (if you know what you're doing)
         or just use globals() (this is the recommended usage as it updates when you declare new variable
         and you don't need to care about it - i.e. just do ... kernel_globals=globals(), ...)
-    :param categorical_names: dict
+    :param categorical_names: ``dict``
         A dictionary with index_of_feature: list of the names for categorical features.
         For example if n-th feature of train_data (train_data[:, n]) is categorical the dict entry should look like
         this: {n: [name_if_0, name_if_1, name_if_2, ... ]}
         Used for better readability and determining which features are categorical, which improves some methods.
-    :param mode: 'classification' or 'regression'
-    :param class_names: list
+    :param mode: `'classification' or 'regression'`
+    :param class_names: ``list``
         Names for output classes in order in which the predict_function returns
         probabilities for them. Used just to make input and output more human-friendly
-    :param feature_names: list
+    :param feature_names: ``list``
         Names for features in order of appearing in train_data. If not filled and train_data is
         an instance of pandas.DataFrame, train_data.columns is used.
         Used to make input and output more human-friendly
@@ -290,7 +289,8 @@ class ExpyBox:
         pdp = PDP(train_data=self.X_train,
                   predict_function=self.predict_function,
                   feature_names=self.feature_names,
-                  globals_options=self.kernel_globals.keys())
+                  globals_options=self.kernel_globals.keys(),
+                  is_classification=True if self.mode == 'classification' else False)
         self._display_interact(explainer=pdp, explain_instance=pdp.require_instance)
 
     def lime(self) -> None:

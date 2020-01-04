@@ -137,6 +137,6 @@ class Anchors(Explainer):
         )
         explanation_clauses = ' AND '.join(explanation['names'])
         print(f"IF {explanation_clauses}\n"
-              f" THEN Prediction = {explanation['raw']['prediction']:.4f}\n"
+              f" THEN Prediction = {explanation['raw']['prediction']:.4f}\n"  # todo: for classification show names if possible!
               f" WITH Precision: {explanation['precision']:.2f}\n"
               f"  AND Coverage: {explanation['coverage']:.2f}")

@@ -11,7 +11,7 @@ README = (HERE / "README.md").read_text()
 setup(
     name='expybox',
     packages=find_packages(),
-    version='0.0.4',
+    version='0.0.5',
     license='MIT',
     description='Jupyter notebook toolbox for model interpretability/explainability',
     long_description=README,

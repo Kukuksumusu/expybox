@@ -7,7 +7,7 @@ from .explainers.lime import Lime
 from .explainers.pdp import PDP
 from .explainers.shap import Shap, ShapFI
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 
 # enable RuntimeWarnings (some imports just break filters I think, so just restore it)
 # this is not very nice, but I'm not sure how to do this otherwise :(

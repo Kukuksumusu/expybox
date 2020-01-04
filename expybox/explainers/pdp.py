@@ -19,11 +19,12 @@ class PDP(Explainer):
     require_instance = False
 
     def __init__(self, train_data: np.array, predict_function: Callable, globals_options: dict.keys,
-                 feature_names: List[str]):
+                 feature_names: List[str], is_classification: bool = True):
         self.X_train = train_data
         self.predict_function = predict_function
         self.globals_options = globals_options
         self.feature_names = feature_names
+        self.is_classification = is_classification
 
     def build_options(self):
         grid = GridspecLayout(10, 2)
@@ -252,16 +253,38 @@ class PDP(Explainer):
 
     def explain(self, options, instance=None):
         # create dummy object with predict function to pose as a model
-        class Model:
+        class ModelRegression:
             def __init__(self, predict_function: Callable):
                 self.predict_function = predict_function
 
             # we require predict_function to be able to deal with numpy array, but pdpbox sends in pandas dataframe
             # so we create a wrapper that transforms the df to numpy array
-            def predict(self, instance):
-                return self.predict_function(instance.to_numpy())
+            def predict(self, instances):
+                return self.predict_function(instances.to_numpy())
 
-        model = Model(self.predict_function)
+        class ModelClassification:
+            def __init__(self, predict_function: Callable):
+                self.predict_function = predict_function
+
+            # we require predict_function to be able to deal with numpy array, but pdpbox sends in pandas dataframe
+            # so we create a wrapper that transforms the df to numpy array
+            # in this case the predict function is predict_proba
+            def predict_proba(self, instances):
+                return self.predict_function(instances.to_numpy())
+
+            # pdpbox requires model to also have predict function, so we have to create that as well
+            def predict(self, instances):
+                predictions = self.predict_function(instances.to_numpy())
+                res = []
+                for prediction in predictions:
+                    res.append(list(prediction).index(max(prediction)))
+                return np.array(res)
+
+        if self.is_classification:
+            model = ModelClassification(self.predict_function)
+        else:
+            model = ModelRegression(self.predict_function)
+
         # pdpbox only accepts pandas dataframe
         dataset = pd.DataFrame(self.X_train, columns=self.feature_names)
 
