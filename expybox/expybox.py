@@ -17,6 +17,37 @@ import warnings
 class ExpyBox:
     """
     Main class to instantiate and hold global data like predict_function, train_data and so on.
+
+    :param train_data: numpy array or pandas dataframe of shape (#instances, #features)
+        Data used to explain models (for methods that require data)
+        and to offer instances from (when building instance).
+        Categorical features need to be label_encoded into integers starting from 0.
+        One-hot encoding is not currently supported.
+    :param predict_function: Callable
+
+        Predict function of a model.
+        In case of classification it should return probabilities of classes for each class.
+        **Needs** to be able to deal with numpy array with shape (#instances, #features). If that's not the case for
+        your model, I recommend writing a wrapper function and pass that one.
+    :param kernel_globals: dict
+        A dictionary with name_of_variable: variable (**NOT** its value!) from your kernel.
+        Used to enable passing variable declared in your Jupyter notebook as a value to certain fields.
+        You can either create this dictionary yourself (if you know what you're doing)
+        or just use globals() (this is the recommended usage as it updates when you declare new variable
+        and you don't need to care about it - i.e. just do ... kernel_globals=globals(), ...)
+    :param categorical_names: dict
+        A dictionary with index_of_feature: list of the names for categorical features.
+        For example if n-th feature of train_data (train_data[:, n]) is categorical the dict entry should look like
+        this: {n: [name_if_0, name_if_1, name_if_2, ... ]}
+        Used for better readability and determining which features are categorical, which improves some methods.
+    :param mode: 'classification' or 'regression'
+    :param class_names: list
+        Names for output classes in order in which the predict_function returns
+        probabilities for them. Used just to make input and output more human-friendly
+    :param feature_names: list
+        Names for features in order of appearing in train_data. If not filled and train_data is
+        an instance of pandas.DataFrame, train_data.columns is used.
+        Used to make input and output more human-friendly
     """
 
     def __init__(self,
@@ -27,32 +58,6 @@ class ExpyBox:
                  mode: Optional[str] = 'classification',
                  class_names: Optional[list] = None,
                  feature_names: Optional[list] = None):
-        """
-        :param train_data: numpy array or pandas dataframe of shape (#instances, #features)
-        Data used to explain models (for methods that require data)
-        and to offer instances from (when building instance).
-        Categorical features need to be label_encoded into integers starting from 0.
-        One-hot encoding is not currently supported.
-        :param predict_function: Predict function of a model.
-        In case of classification it should return probabilities of classes for each class.
-         *Needs* to be able to deal with numpy array with shape (#instances, #features). If that's not the case for
-         your model, I recommend writing a wrapper function and pass that one.
-        :param kernel_globals: A dictionary with name_of_variable: variable (*NOT* its value!) from your kernel.
-        Used to enable passing variable declared in your Jupyter notebook as a value to certain fields.
-        You can either create this dictionary yourself (if you know what you're doing)
-        or just use globals() (this is the recommended usage as it updates when you declare new variable
-        and you don't need to care about it - i.e. just do ... kernel_globals=globals(), ...)
-        :param categorical_names: A dictionary with index_of_feature: list of the names for categorical features.
-        For example if n-th feature of train_data (train_data[:, n]) is categorical the dict entry should look like
-        this: {n: [name_if_0, name_if_1, name_if_2, ... ]}
-        Used for better readability and determining which features are categorical, which improves some methods.
-        :param mode: 'classification' or 'regression'
-        :param class_names: Names for output classes in order in which the predict_function returns
-        probabilities for them. Used just to make input and output more human-friendly
-        :param feature_names: Names for features in order of appearing in train_data. If not filled and train_data is
-        an instance of pandas.DataFrame, train_data.columns is used.
-        Used to make input and output more human-friendly
-        """
         if len(train_data.shape) == 1:
             raise ValueError(f"Expected 2D array, got 1D array instead:{train_data}.\n"
                              f"Reshape your data either using array.reshape(-1, 1) if your data has a single feature "
@@ -279,6 +284,7 @@ class ExpyBox:
     def pdplot(self) -> None:
         """
         Create dialog for partial dependence plot
+
         :return: None
         """
         pdp = PDP(train_data=self.X_train,
@@ -287,9 +293,10 @@ class ExpyBox:
                   globals_options=self.kernel_globals.keys())
         self._display_interact(explainer=pdp, explain_instance=pdp.require_instance)
 
-    def lime(self):
+    def lime(self) -> None:
         """
         Create dialog for lime
+
         :return: None
         """
         lime = Lime(train_data=self.X_train,
@@ -301,9 +308,10 @@ class ExpyBox:
                     class_names=self.class_names)
         self._display_interact(explainer=lime, explain_instance=lime.require_instance)
 
-    def anchors(self):
+    def anchors(self) -> None:
         """
         Create dialog for Anchors
+
         :return: None
         """
         anchors = Anchors(predict_function=self.predict_function,
@@ -318,6 +326,7 @@ class ExpyBox:
     def shap(self) -> None:
         """
         Create dialog for shap, providing force and decision plots
+
         :return: None
         """
         shap = Shap(train_data=self.X_train,
@@ -329,9 +338,10 @@ class ExpyBox:
                     )
         self._display_interact(explainer=shap, explain_instance=shap.require_instance)
 
-    def shap_feature_importance(self):
+    def shap_feature_importance(self) -> None:
         """
         Create dialog for shap summary plot, i.e. feature importance based on Shapley values
+
         :return: None
         """
         shap = ShapFI(train_data=self.X_train,
