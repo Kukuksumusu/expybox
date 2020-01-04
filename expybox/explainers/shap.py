@@ -212,7 +212,7 @@ class Shap(Explainer):
                 show=True,
                 color_bar=True,
                 link=options['link']
-            )  # todo: offer some options for customizing this?
+            )
 
     def _kmeans(self, means: int) -> DenseData:
         """

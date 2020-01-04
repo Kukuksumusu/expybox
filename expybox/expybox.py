@@ -156,7 +156,7 @@ class ExpyBox:
                 # add error to box
                 import_box.children = [instance_variable, import_btn, import_error]
 
-        import_error = HTML("Import from variable failed.")  # todo: improve error message
+        import_error = HTML("Import from variable failed\n")
         import_btn = Button(
             description='Import'
         )

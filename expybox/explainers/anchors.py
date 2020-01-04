@@ -9,10 +9,12 @@ import numpy as np
 
 class Anchors(Explainer):
     resources = {
-        # todo
+        'Anchors paper': 'https://homes.cs.washington.edu/~marcotcr/aaai18.pdf',
+        'Anchors (alibi) documentation': 'https://docs.seldon.io/projects/alibi/en/stable/methods/Anchors.html',
+        'Alibi API reference':
+            'https://docs.seldon.io/projects/alibi/en/stable/api/alibi.explainers.anchor_tabular.html',
         'compute_beta in alibi (how B parameter for beam search is calculated from delta)':
             'https://github.com/SeldonIO/alibi/blob/master/alibi/explainers/anchor_base.py#L116',
-
     }
 
     require_instance = True
@@ -107,8 +109,7 @@ class Anchors(Explainer):
         options_map['disc_perc'] = disc_perc
 
         if not self.is_classification:
-            warnings.warn('Anchors for regression are tricky')
-            # todo: idk, maybe do something about it, don't just accept it as a fact?
+            warnings.warn('Anchors for regression are tricky, consider discretizing the model output.')
 
         grid[0, :] = threshold
         grid[1, 0] = delta
