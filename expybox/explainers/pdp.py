@@ -221,12 +221,14 @@ class PDP(Explainer):
         def disable_lines(change):
             frac_to_plot.disabled = not change['new']
             cluster.disabled = not change['new']
+            n_cluster_centers.disabled = not (change['new'] and cluster.value)
+            cluster_method.disabled = not (change['new'] and cluster.value)
         lines.observe(disable_lines, names=['value'])
 
         # set up disabling of clustering options
         def disable_clustering(change):
-            n_cluster_centers.disabled = not change['new']
-            cluster_method.disabled = not change['new']
+            n_cluster_centers.disabled = not (cluster.value and change['new'])
+            cluster_method.disabled = not (cluster.value and change['new'])
         cluster.observe(disable_clustering, names=['value'])
 
         grid[0, :] = feature
@@ -263,13 +265,22 @@ class PDP(Explainer):
         # pdpbox only accepts pandas dataframe
         dataset = pd.DataFrame(self.X_train, columns=self.feature_names)
 
-        cust_range = None
+        percentile_range = None
+        grid_range = None
         grid_points = None
         if options['cust_range'] is True:
-            cust_range = (options['range_min'], options['range_max'])
             grid_points = options['cust_grid_points']
-            if cust_range[0] >= cust_range[1]:
-                raise ValueError("Custom range minimum is >= custom range maximum")
+            if grid_points is None:
+                if options['range_min'] >= options['range_max']:
+                    raise ValueError("Custom range minimum is >= custom range maximum")
+
+                if options['grid_type'] == 'percentile':
+                    percentile_range = (options['range_min'], options['range_max'])
+                else:
+                    grid_range = (options['range_min'], options['range_max'])
+
+        if options['lines'] is False:
+            options['cluster'] = False
 
         isolated = pdp.pdp_isolate(
             model=model,
@@ -278,8 +289,8 @@ class PDP(Explainer):
             feature=options['feature'],
             num_grid_points=options['num_grid_points'],
             grid_type=options['grid_type'],
-            percentile_range=cust_range,
-            grid_range=cust_range,
+            percentile_range=percentile_range,
+            grid_range=grid_range,
             cust_grid_points=grid_points
         )
 
