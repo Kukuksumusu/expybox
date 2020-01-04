@@ -106,7 +106,7 @@ class Lime(Explainer):
         discretizer = Dropdown(
             description='Discretizer:',
             style=style,
-            options=['quartile', 'decile', 'entropy'],
+            options=['quartile', 'decile'],  # not supporting entropy, because we don't have training labels :/
             value='quartile',
             description_tooltip='Which discretizer to use. Only matters if discretize continuous is True'
         )
