@@ -1,37 +1,166 @@
 
+
 <!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>ExpyBox &mdash; ExpyBox  documentation</title>
+  
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta charset="utf-8" />
-    <title>Welcome to ExpyBox’s documentation! &#8212; ExpyBox  documentation</title>
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
    
-  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
           
 
-          <div class="body" role="main">
+          
+            <a href="#" class="icon icon-home"> ExpyBox
+          
+
+          
+          </a>
+
+          
             
-  <div class="section" id="welcome-to-expybox-s-documentation">
-<h1>Welcome to ExpyBox’s documentation!<a class="headerlink" href="#welcome-to-expybox-s-documentation" title="Permalink to this headline">¶</a></h1>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">ExpyBox</a></li>
+<li><a class="reference internal" href="#api-reference">API reference</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">ExpyBox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#">Docs</a> &raquo;</li>
+        
+      <li>ExpyBox</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="expybox">
+<h1>ExpyBox<a class="headerlink" href="#expybox" title="Permalink to this headline">¶</a></h1>
+<p>ExpyBox is a Jupyter toolbox for model interpretability/explainability.
+It lets you create interactive Jupyter notebooks to explain your model.
+Because of alibi package ExpyBox requires <strong>64-bit</strong> Python 3.7 or higher.</p>
+<p>It is also recommended to create separate virtual enviroment - you can use
+<a class="reference external" href="https://docs.python.org/3/library/venv.html">venv</a>.</p>
+<p>Otherwise the installation process is the same as for other packages, just use pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install expybox
+</pre></div>
+</div>
+</div>
+<div class="section" id="api-reference">
+<h1>API reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <dl class="class">
@@ -41,33 +170,32 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>train_data</strong> – numpy array or pandas dataframe of shape (#instances, #features)
+<li><p><strong>train_data</strong> – <code class="docutils literal notranslate"><span class="pre">numpy</span> <span class="pre">array</span> <span class="pre">or</span> <span class="pre">pandas</span> <span class="pre">dataframe</span> <span class="pre">of</span> <span class="pre">shape</span> <span class="pre">(#instances,</span> <span class="pre">#features)</span></code>
 Data used to explain models (for methods that require data)
 and to offer instances from (when building instance).
 Categorical features need to be label_encoded into integers starting from 0.
 One-hot encoding is not currently supported.</p></li>
-<li><p><strong>predict_function</strong> – <p>Callable</p>
-<p>Predict function of a model.
+<li><p><strong>predict_function</strong> – <code class="docutils literal notranslate"><span class="pre">Callable</span></code>
+Predict function of a model.
 In case of classification it should return probabilities of classes for each class.
 <strong>Needs</strong> to be able to deal with numpy array with shape (#instances, #features). If that’s not the case for
-your model, I recommend writing a wrapper function and pass that one.</p>
-</p></li>
-<li><p><strong>kernel_globals</strong> – dict
+your model, I recommend writing a wrapper function and pass that one.</p></li>
+<li><p><strong>kernel_globals</strong> – <code class="docutils literal notranslate"><span class="pre">dict</span></code>
 A dictionary with name_of_variable: variable (<strong>NOT</strong> its value!) from your kernel.
 Used to enable passing variable declared in your Jupyter notebook as a value to certain fields.
 You can either create this dictionary yourself (if you know what you’re doing)
 or just use globals() (this is the recommended usage as it updates when you declare new variable
 and you don’t need to care about it - i.e. just do … kernel_globals=globals(), …)</p></li>
-<li><p><strong>categorical_names</strong> – dict
+<li><p><strong>categorical_names</strong> – <code class="docutils literal notranslate"><span class="pre">dict</span></code>
 A dictionary with index_of_feature: list of the names for categorical features.
 For example if n-th feature of train_data (train_data[:, n]) is categorical the dict entry should look like
 this: {n: [name_if_0, name_if_1, name_if_2, … ]}
 Used for better readability and determining which features are categorical, which improves some methods.</p></li>
-<li><p><strong>mode</strong> – ‘classification’ or ‘regression’</p></li>
-<li><p><strong>class_names</strong> – list
+<li><p><strong>mode</strong> – <cite>‘classification’ or ‘regression’</cite></p></li>
+<li><p><strong>class_names</strong> – <code class="docutils literal notranslate"><span class="pre">list</span></code>
 Names for output classes in order in which the predict_function returns
 probabilities for them. Used just to make input and output more human-friendly</p></li>
-<li><p><strong>feature_names</strong> – list
+<li><p><strong>feature_names</strong> – <code class="docutils literal notranslate"><span class="pre">list</span></code>
 Names for features in order of appearing in train_data. If not filled and train_data is
 an instance of pandas.DataFrame, train_data.columns is used.
 Used to make input and output more human-friendly</p></li>
@@ -142,66 +270,43 @@ Used to make input and output more human-friendly</p></li>
 </div>
 
 
+           </div>
+           
           </div>
-          
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="#">ExpyBox</a></h1>
+          <footer>
+  
 
+  <hr/>
 
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jakub Štercl
 
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-
-
-
-
-<h3>Navigation</h3>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="#">Documentation overview</a><ul>
-  </ul></li>
-</ul>
-</div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
+</footer>
 
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2020, Jakub Štercl.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="_sources/index.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
 
-    
+    </section>
 
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
     
-  </body>
+   
+
+</body>
 </html>
