@@ -82,10 +82,10 @@ class Shap(Explainer):
         def swap_kmeans(change):
             if change['new'] == 'kmeans':
                 data.lookup_in_kernel = False
-                grid[0, 1] = kmeans_count
+                grid[1, 1] = kmeans_count
             else:
                 data.lookup_in_kernel = True
-                grid[0, 1] = data
+                grid[1, 1] = data
 
         background_data.observe(swap_kmeans, names=['value'])
 
@@ -111,7 +111,7 @@ class Shap(Explainer):
             max=999999,
             value=2048,
             disabled=True,
-            description='Number of samples:',
+            description='Model sample size:',
             description_tooltip='Number of times to re-evaluate the model when explaining each prediction.\n'
                                 'More samples lead to lower variance estimates of the SHAP values.\n'
                                 'The "auto" setting uses nsamples = 2 * X.shape[1] + 2048.',
@@ -121,8 +121,9 @@ class Shap(Explainer):
 
         # auto_nsamples
         auto_nsamples = Checkbox(
-            description='Auto choose number of samples',
-            value=True
+            description='Auto choose model sample size',
+            value=True,
+            style={'description_width': 'auto'}
         )
         options_map['auto_nsamples'] = auto_nsamples
 
@@ -247,8 +248,8 @@ class ShapFI(Shap):
             min=1,
             max=self.X_train.shape[0],
             step=1,
-            value=self.X_train.shape[0],
-            description='Sample size',
+            value=min(self.X_train.shape[0], 1000),
+            description='Sample size:',
             description_tooltip='Number of instances from train data to use for calculating mean shap value.',
             style={'description_width': '60%'}
         )
