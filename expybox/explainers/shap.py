@@ -289,7 +289,7 @@ class ShapFI(Shap):
         )
 
         # limit to only selected class (if any was selected)
-        if options['class_to_explain'] != -1:
+        if 'class_to_explain' in options and options['class_to_explain'] != -1:
             shap_values = shap_values[options['class_to_explain']]
 
         summary_plot(
