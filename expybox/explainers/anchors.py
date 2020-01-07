@@ -1,5 +1,5 @@
 import warnings
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Optional
 from ipywidgets import GridspecLayout, BoundedFloatText, FloatSlider, BoundedIntText, Combobox
 from ..utils.utils import UpdatingCombobox
 from .explainer import Explainer
@@ -20,13 +20,15 @@ class Anchors(Explainer):
     require_instance = True
 
     def __init__(self, train_data: np.array, predict_function: Callable, globals_options: dict.keys,
-                 feature_names: List[str], categorical_names: Dict[int, str], is_classification: bool = True):
+                 feature_names: List[str], categorical_names: Dict[int, str], is_classification: bool = True,
+                 class_names: Optional[List[str]] = None):
         self.predict_function = predict_function
         self.globals_options = globals_options
         self.X_train = train_data
         self.feature_names = feature_names
         self.categorical_names = categorical_names
         self.is_classification = is_classification
+        self.class_names = class_names
 
     def build_options(self):
         grid = GridspecLayout(3, 2)
@@ -135,8 +137,15 @@ class Anchors(Explainer):
             tau=options['tau'],
             batch_size=options['batch_size']
         )
+
+        prediction = round(explanation['raw']['prediction'], 4)
+        if self.is_classification:
+            prediction = int(prediction)
+            if self.class_names is not None:
+                prediction = self.class_names[prediction]
+
         explanation_clauses = ' AND '.join(explanation['names'])
         print(f"IF {explanation_clauses}\n"
-              f" THEN Prediction = {explanation['raw']['prediction']:.4f}\n"  # todo: for classification show names if possible!
+              f" THEN Prediction = {prediction}\n"  # todo: for classification show names if possible!
               f" WITH Precision: {explanation['precision']:.2f}\n"
               f"  AND Coverage: {explanation['coverage']:.2f}")

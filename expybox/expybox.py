@@ -29,7 +29,7 @@ class ExpyBox:
         **Needs** to be able to deal with numpy array with shape (#instances, #features). If that's not the case for
         your model, I recommend writing a wrapper function and pass that one.
     :param kernel_globals: ``dict``
-        A dictionary with name_of_variable: variable (**NOT** its value!) from your kernel.
+        A dictionary with name_of_variable: variable (NOT its value!) from your kernel.
         Used to enable passing variable declared in your Jupyter notebook as a value to certain fields.
         You can either create this dictionary yourself (if you know what you're doing)
         or just use globals() (this is the recommended usage as it updates when you declare new variable
@@ -319,7 +319,8 @@ class ExpyBox:
                           train_data=self.X_train,
                           feature_names=self.feature_names,
                           categorical_names=self.categorical_names,
-                          is_classification=True if self.mode == 'classification' else False
+                          is_classification=True if self.mode == 'classification' else False,
+                          class_names=self.class_names
                           )
         self._display_interact(explainer=anchors, explain_instance=anchors.require_instance)
 
