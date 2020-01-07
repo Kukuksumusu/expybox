@@ -1,5 +1,6 @@
 .idea
 dist
-__pycache__
+*__pycache__*
 *.egg-info
 build
+*.ipynb_checkpoints
