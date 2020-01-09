@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Anchors &mdash; ExpyBox  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SHAP" href="shap.html" />
+    <link rel="prev" title="LIME" href="lime.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ExpyBox
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Methods</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="PDplots.html">Partial Dependence plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lime.html">LIME</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Anchors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#method-parameters">Method parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shap.html">SHAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="shapFI.html">SHAP Feature Importance</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ExpyBox</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Anchors</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/methods/anchors.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="anchors">
+<h1>Anchors<a class="headerlink" href="#anchors" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="expybox.ExpyBox.anchors">
+<code class="sig-prename descclassname">ExpyBox.</code><code class="sig-name descname">anchors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#expybox.ExpyBox.anchors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create dialog for Anchors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="method-parameters">
+<h1>Method parameters<a class="headerlink" href="#method-parameters" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><dl class="simple">
+<dt>threshold</dt><dd><p>Minimum precision threshold for anchor rules.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>delta</dt><dd><p>Used to compute beta.
+The lower the value, the higher the beta parameter for beam search (wider beam).
+You can see how exactly beta is computed by following a link in resources</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>tau</dt><dd><p>Margin between lower confidence bound and minimum precision or upper bound.
+Here tau is used in place of delta from IML book</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>batch size</dt><dd><p>Batch size used for sampling</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>discretizer percentiles</dt><dd><p>Iterable with percentiles (int) used for discretization of ordinal features.
+If None, [25, 50, 75] will be used
+Here you need specify the name of the variable with list of percentiles
+that is in the kernel_globals parameter that you passed to ExpyBox.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="shap.html" class="btn btn-neutral float-right" title="SHAP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="lime.html" class="btn btn-neutral float-left" title="LIME" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jakub Štercl
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -34,7 +34,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Partial Dependence plot" href="methods/PDplots.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -78,13 +79,16 @@
               
             
             
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">ExpyBox</a></li>
-<li><a class="reference internal" href="#api-reference">API reference</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+              <p class="caption"><span class="caption-text">Methods</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="methods/PDplots.html">Partial Dependence plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/lime.html">LIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/anchors.html">Anchors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/anchors.html#method-parameters">Method parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/shap.html">SHAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/shapFI.html">SHAP Feature Importance</a></li>
 </ul>
-</div>
+
             
           
         </div>
@@ -165,7 +169,7 @@ Because of alibi package ExpyBox requires <strong>64-bit</strong> Python 3.7 or 
 </div>
 <dl class="class">
 <dt id="expybox.ExpyBox">
-<em class="property">class </em><code class="sig-prename descclassname">expybox.</code><code class="sig-name descname">ExpyBox</code><span class="sig-paren">(</span><em class="sig-param">train_data: Union[pandas.DataFrame, numpy.array], predict_function: Callable, kernel_globals: Optional[dict] = None, categorical_names: Optional[dict] = None, mode: Optional[str] = 'classification', class_names: Optional[list] = None, feature_names: Optional[list] = None</em><span class="sig-paren">)</span><a class="headerlink" href="#expybox.ExpyBox" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">expybox.</code><code class="sig-name descname">ExpyBox</code><span class="sig-paren">(</span><em class="sig-param">train_data</em>, <em class="sig-param">predict_function</em>, <em class="sig-param">kernel_globals=None</em>, <em class="sig-param">categorical_names=None</em>, <em class="sig-param">mode='classification'</em>, <em class="sig-param">class_names=None</em>, <em class="sig-param">feature_names=None</em><span class="sig-paren">)</span><a class="headerlink" href="#expybox.ExpyBox" title="Permalink to this definition">¶</a></dt>
 <dd><p>Main class to instantiate and hold global data like predict_function, train_data and so on.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -181,7 +185,7 @@ In case of classification it should return probabilities of classes for each cla
 <strong>Needs</strong> to be able to deal with numpy array with shape (#instances, #features). If that’s not the case for
 your model, I recommend writing a wrapper function and pass that one.</p></li>
 <li><p><strong>kernel_globals</strong> – <code class="docutils literal notranslate"><span class="pre">dict</span></code>
-A dictionary with name_of_variable: variable (<strong>NOT</strong> its value!) from your kernel.
+A dictionary with name_of_variable: variable (NOT its value!) from your kernel.
 Used to enable passing variable declared in your Jupyter notebook as a value to certain fields.
 You can either create this dictionary yourself (if you know what you’re doing)
 or just use globals() (this is the recommended usage as it updates when you declare new variable
@@ -202,63 +206,19 @@ Used to make input and output more human-friendly</p></li>
 </ul>
 </dd>
 </dl>
-<dl class="method">
-<dt id="expybox.ExpyBox.anchors">
-<code class="sig-name descname">anchors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#expybox.ExpyBox.anchors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create dialog for Anchors</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
 </dd></dl>
 
-<dl class="method">
-<dt id="expybox.ExpyBox.lime">
-<code class="sig-name descname">lime</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#expybox.ExpyBox.lime" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create dialog for lime</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="expybox.ExpyBox.pdplot">
-<code class="sig-name descname">pdplot</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#expybox.ExpyBox.pdplot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create dialog for partial dependence plot</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="expybox.ExpyBox.shap">
-<code class="sig-name descname">shap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#expybox.ExpyBox.shap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create dialog for shap, providing force and decision plots</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="expybox.ExpyBox.shap_feature_importance">
-<code class="sig-name descname">shap_feature_importance</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#expybox.ExpyBox.shap_feature_importance" title="Permalink to this definition">¶</a></dt>
-<dd><p>Create dialog for shap summary plot, i.e. feature importance based on Shapley values</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Methods</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="methods/PDplots.html">Partial Dependence plot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/lime.html">LIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/anchors.html">Anchors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/anchors.html#method-parameters">Method parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/shap.html">SHAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="methods/shapFI.html">SHAP Feature Importance</a></li>
+</ul>
+</div>
 </div>
 <div class="section" id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
@@ -274,6 +234,13 @@ Used to make input and output more human-friendly</p></li>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="methods/PDplots.html" class="btn btn-neutral float-right" title="Partial Dependence plot" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
   
 
   <hr/>

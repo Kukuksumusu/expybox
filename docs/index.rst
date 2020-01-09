@@ -29,7 +29,18 @@ API reference
 
 
 .. autoclass:: expybox.ExpyBox
-   :members:
+
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Methods
+
+   methods/PDplots.rst
+   methods/lime.rst
+   methods/anchors.rst
+   methods/shap.rst
+   methods/shapFI.rst
+
 
 Indices and tables
 ==================
