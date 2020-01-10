@@ -10,10 +10,11 @@ from .explainer import Explainer
 
 class Lime(Explainer):
     resources = {
-        'Documentation (lime_tabular)': 'https://lime-ml.readthedocs.io/en/latest/lime.html#module-lime.lime_tabular',
+        'Documentation': 'https://expybox.readthedocs.io/en/latest/methods/lime.html',
+        'LIME (lime-ml/lime_tabular) documentation': 'https://lime-ml.readthedocs.io/en/latest/lime.html#module-lime.lime_tabular',
         'LIME in IML book': 'https://christophm.github.io/interpretable-ml-book/lime.html',
         'LIME paper': 'https://arxiv.org/abs/1602.04938',
-        'lime package on GitHub': 'https://github.com/marcotcr/lime',
+        'lime-ml package on GitHub': 'https://github.com/marcotcr/lime',
         'Options for distance metric':
             'https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html'
     }
@@ -84,8 +85,8 @@ class Lime(Explainer):
                                 ' - highest_weights: selects the features that have the highest'
                                 'product of absolute weight * original data point when learning with all the features\n'
                                 ' - lasso_path: chooses features based on the lasso regularization path\n'
-                                ' - none: uses all features, ignores num_features\n'
-                                ' - auto: uses forward_selection if num_features <= 6, and highest_weights otherwise'
+                                ' - none: use all features, ignore Number of features option\n'
+                                ' - auto: use forward_selection if num_features <= 6, and highest_weights otherwise'
                                 ,
             options=['forward_selection', 'highest_weights', 'lasso_path', 'none', 'auto'],
             value='auto'
@@ -122,7 +123,7 @@ class Lime(Explainer):
             description='Distance metric:',
             style=style,
             value='euclidean',
-            description_tooltip='What distance metric to use (for weights). '
+            description_tooltip='What distance metric to use (for calculating weights). '
                                 'Used as an "distance_metric" argument for sklearn.metrics.pairwise_distances'
         )
         options_map['distance_metric'] = distance_metric

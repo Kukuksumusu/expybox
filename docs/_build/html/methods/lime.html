@@ -84,7 +84,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="PDplots.html">Partial Dependence plot</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">LIME</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#method-parameters">Method parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#resources">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anchors.html">Anchors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anchors.html#method-parameters">Method parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="anchors.html#resources">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shap.html">SHAP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shapFI.html">SHAP Feature Importance</a></li>
 </ul>
@@ -164,6 +168,73 @@
 </dl>
 </dd></dl>
 
+</div>
+<div class="section" id="method-parameters">
+<h1>Method parameters<a class="headerlink" href="#method-parameters" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><dl class="simple">
+<dt>Number of features</dt><dd><p>Maximum number of features present in explanation</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Number of samples</dt><dd><p>Size of the neighborhood to learn the surrogate linear model</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Kernel width</dt><dd><p>Kernel width for the exponential kernel. Actual value used will be the
+<code class="code docutils literal notranslate"><span class="pre">inputted</span> <span class="pre">value</span> <span class="pre">*</span> <span class="pre">sqrt(num_of_cols_in_train_data)</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Feature selection</dt><dd><p>Feature selection method for choosing the best features for surrogate model. There are following options:</p>
+<ul class="simple">
+<li><p>forward_selection: iteratively add features to the model (costly when num_features is high)</p></li>
+<li><p>highest_weights: selects the features that have the highest product of
+absolute weight * original data point when learning with all the features</p></li>
+<li><p>lasso_path: choose features based on the lasso regularization path</p></li>
+<li><p>none: use all features, ignore <code class="code docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">features</span></code> option</p></li>
+<li><p>auto: use forward_selection if <code class="code docutils literal notranslate"><span class="pre">Number</span> <span class="pre">of</span> <span class="pre">features</span></code> &lt;= 6, and highest_weights otherwise</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Discretize continuous</dt><dd><p>Whether to discretize all non-categorical features</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Discretizer</dt><dd><p>Which discretizer to use when discretizing continuous features. Only matters if discretize continuous is True.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Distance metric</dt><dd><p>What distance metric to use for calculating weights of perturbed instances.</p>
+<p>It’s used as an <code class="code docutils literal notranslate"><span class="pre">distance_metric</span></code> argument for <code class="code docutils literal notranslate"><span class="pre">sklearn.metrics.pairwise_distances()</span></code>.
+Documentation of the function (with options for metric): <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise_distances.html">sklearn.metrics.pairwise_distances</a></p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Variable with model regressor</dt><dd><p>If you want to use a different regressor than <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ridge_regression.html?highlight=ridge%20regression#sklearn.linear_model.ridge_regression">Ridge regressor</a>
+you can specify a variable in provided <code class="code docutils literal notranslate"><span class="pre">kernel_globals</span></code> dictionary with the regressor.</p>
+<p>It must have <code class="code docutils literal notranslate"><span class="pre">model_regressor.coef_</span></code> and “sample_weight” as a parameter to <code class="code docutils literal notranslate"><span class="pre">model_regressor.fit()</span></code></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h1>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://lime-ml.readthedocs.io/en/latest/lime.html#module-lime.lime_tabular">LIME (lime-ml/lime_tabular) documentation</a>,</p></li>
+<li><p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/lime.html">LIME in IML book</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1602.04938">LIME paper</a></p></li>
+<li><p><a class="reference external" href="https://github.com/marcotcr/lime">lime-ml package on GitHub</a></p></li>
+</ul>
 </div>
 
 
