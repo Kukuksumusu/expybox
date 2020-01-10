@@ -9,6 +9,7 @@ import numpy as np
 
 class Anchors(Explainer):
     resources = {
+        'Documentation': 'https://expybox.readthedocs.io/en/latest/methods/anchors.html',
         'Anchors paper': 'https://homes.cs.washington.edu/~marcotcr/aaai18.pdf',
         'Anchors (alibi) documentation': 'https://docs.seldon.io/projects/alibi/en/stable/methods/Anchors.html',
         'Alibi API reference':

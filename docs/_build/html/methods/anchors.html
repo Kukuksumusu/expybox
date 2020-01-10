@@ -86,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="lime.html">LIME</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Anchors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#method-parameters">Method parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#resources">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shap.html">SHAP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shapFI.html">SHAP Feature Importance</a></li>
 </ul>
@@ -177,13 +178,14 @@
 <li><dl class="simple">
 <dt>delta</dt><dd><p>Used to compute beta.
 The lower the value, the higher the beta parameter for beam search (wider beam) is.
-You can see how exactly beta is computed by following a link in resources.</p>
+You can see how exactly beta is computed <a class="reference external" href="https://github.com/SeldonIO/alibi/blob/master/alibi/explainers/anchor_base.py#L116">here</a>.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
 <dt>tau</dt><dd><p>Margin between lower confidence bound and minimum precision or upper bound.
-Here tau is used in place of delta from IML book.</p>
+Here tau is used in place of delta from <a class="reference external" href="https://christophm.github.io/interpretable-ml-book/anchors.html#finding-anchors">IML book</a>
+or the <a class="reference external" href="https://homes.cs.washington.edu/~marcotcr/aaai18.pdf">Anchros paper</a>.</p>
 </dd>
 </dl>
 </li>
@@ -193,13 +195,22 @@ Here tau is used in place of delta from IML book.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>discretizer percentiles</dt><dd><p>Iterable with percentiles (int) used for discretization of ordinal features.
-If None, [25, 50, 75] will be used
+<dt>discretizer percentiles</dt><dd><p>Iterable with percentiles (ints) used for discretization of ordinal features.
+If None, <code class="code docutils literal notranslate"><span class="pre">[25,</span> <span class="pre">50,</span> <span class="pre">75]</span></code> will be used.
 Here you need specify the name of the variable with list of percentiles
 that is in the kernel_globals parameter that you passed to ExpyBox.</p>
 </dd>
 </dl>
 </li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h1>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://homes.cs.washington.edu/~marcotcr/aaai18.pdf">Anchors paper</a></p></li>
+<li><p><a class="reference external" href="https://docs.seldon.io/projects/alibi/en/stable/methods/Anchors.html">Anchors (alibi package) documentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.seldon.io/projects/alibi/en/stable/api/alibi.explainers.anchor_tabular.html">Alibi API reference</a></p></li>
+<li><p><a class="reference external" href="https://github.com/SeldonIO/alibi/blob/master/alibi/explainers/anchor_base.py#L116">compute_beta method in alibi (how B parameter for beam search is calculated from delta)</a></p></li>
 </ul>
 </div>
 
