@@ -85,7 +85,10 @@
 <li class="toctree-l1"><a class="reference internal" href="PDplots.html">Partial Dependence plot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lime.html">LIME</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anchors.html">Anchors</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">SHAP</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SHAP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#method-parameters">Method parameters</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="shapFI.html">SHAP Feature Importance</a></li>
 </ul>
 
@@ -164,6 +167,44 @@
 </dl>
 </dd></dl>
 
+<div class="section" id="method-parameters">
+<h2>Method parameters<a class="headerlink" href="#method-parameters" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="simple">
+<dt>Plot</dt><dd><p>Which plot to draw decision, force or both</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Background data</dt><dd><p>What background data will be used to sample from, when simulating “missing” feature</p>
+<ul class="simple">
+<li><p>KMeans: use KMeans to sample from provided dataset</p></li>
+<li><p>Custom variable: provide variable (that is in <code class="code docutils literal notranslate"><span class="pre">kernel_globals</span></code>) with instances to use</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Count of KMeans centers</dt><dd><p>Number of means to use when creating background data. Only used if <code class="code docutils literal notranslate"><span class="pre">Background</span> <span class="pre">data</span></code> is set to <code class="code docutils literal notranslate"><span class="pre">KMeans</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Background data variable</dt><dd><p>Variable with background data from which the “missing” features will be sampled. Only used if <code class="code docutils literal notranslate"><span class="pre">Background</span> <span class="pre">data</span></code> is set to <code class="code docutils literal notranslate"><span class="pre">Custom</span> <span class="pre">variable</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Link</dt><dd><p>A generalized linear model link to connect the feature importance values to the model output</p>
+<p>Since the feature importance values, phi, sum up to the model output, it often makes sense
+to connect them to the ouput with a link function where link(outout) = sum(phi).</p>
+<p>If the model output is a probability then the LogitLink link function makes the feature importance values have log-odds units.</p>
+</dd>
+</dl>
+</li>
+<li></li>
+</ul>
+</div>
 </div>
 
 

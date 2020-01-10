@@ -84,9 +84,11 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="PDplots.html">Partial Dependence plot</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lime.html">LIME</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Anchors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#method-parameters">Method parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#resources">Resources</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Anchors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#method-parameters">Method parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="shap.html">SHAP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shapFI.html">SHAP Feature Importance</a></li>
 </ul>
@@ -166,9 +168,8 @@
 </dl>
 </dd></dl>
 
-</div>
 <div class="section" id="method-parameters">
-<h1>Method parameters<a class="headerlink" href="#method-parameters" title="Permalink to this headline">¶</a></h1>
+<h2>Method parameters<a class="headerlink" href="#method-parameters" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><dl class="simple">
 <dt>threshold</dt><dd><p>Minimum precision threshold for anchor rules.</p>
@@ -205,13 +206,14 @@ that is in the kernel_globals parameter that you passed to ExpyBox.</p>
 </ul>
 </div>
 <div class="section" id="resources">
-<h1>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://homes.cs.washington.edu/~marcotcr/aaai18.pdf">Anchors paper</a></p></li>
 <li><p><a class="reference external" href="https://docs.seldon.io/projects/alibi/en/stable/methods/Anchors.html">Anchors (alibi package) documentation</a></p></li>
 <li><p><a class="reference external" href="https://docs.seldon.io/projects/alibi/en/stable/api/alibi.explainers.anchor_tabular.html">Alibi API reference</a></p></li>
 <li><p><a class="reference external" href="https://github.com/SeldonIO/alibi/blob/master/alibi/explainers/anchor_base.py#L116">compute_beta method in alibi (how B parameter for beam search is calculated from delta)</a></p></li>
 </ul>
+</div>
 </div>
 
 

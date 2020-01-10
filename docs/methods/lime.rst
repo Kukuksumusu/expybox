@@ -1,3 +1,4 @@
+===================================
 LIME
 ===================================
 
@@ -14,7 +15,7 @@ Method parameters
 
 * Kernel width
     Kernel width for the exponential kernel. Actual value used will be the
-    :code:`inputted value * sqrt(num_of_cols_in_train_data)`
+    :code:`inputted value * sqrt(train_data.shape[1])`.
 
 * Feature selection
     Feature selection method for choosing the best features for surrogate model. There are following options:

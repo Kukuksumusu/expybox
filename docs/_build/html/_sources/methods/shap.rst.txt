@@ -1,4 +1,33 @@
+===================================
 SHAP
 ===================================
 
 .. automethod:: expybox.ExpyBox.shap
+
+Method parameters
+===================================
+
+* Plot
+    Which plot to draw decision, force or both
+
+* Background data
+    What background data will be used to sample from, when simulating "missing" feature
+
+    * KMeans: use KMeans to sample from provided dataset
+    * Custom variable: provide variable (that is in :code:`kernel_globals`) with instances to use
+
+* Count of KMeans centers
+    Number of means to use when creating background data. Only used if :code:`Background data` is set to :code:`KMeans`
+
+* Background data variable
+    Variable with background data from which the "missing" features will be sampled. Only used if :code:`Background data` is set to :code:`Custom variable`
+
+* Link
+    A generalized linear model link to connect the feature importance values to the model output
+
+    Since the feature importance values, phi, sum up to the model output, it often makes sense
+    to connect them to the ouput with a link function where link(outout) = sum(phi).
+
+    If the model output is a probability then the LogitLink link function makes the feature importance values have log-odds units.
+
+*
