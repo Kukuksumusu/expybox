@@ -44,6 +44,8 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
+# Sphinx started supporting typehints ignoring in 2.1.0
+needs_sphinx = '2.1.0'
 
 # -- Options for HTML output -------------------------------------------------
 
