@@ -10,6 +10,7 @@ from ipywidgets import Dropdown, GridspecLayout, Checkbox, BoundedIntText, Combo
 
 class Shap(Explainer):
     resources = {
+        'Documentation': 'https://expybox.readthedocs.io/en/latest/methods/shap.html',
         'SHAP paper': 'https://arxiv.org/abs/1705.07874',
         'SHAP in IML book': 'https://christophm.github.io/interpretable-ml-book/shap.html',
         'Documentation of shap': 'https://shap.readthedocs.io/en/latest/#shap.KernelExplainer',
@@ -40,7 +41,7 @@ class Shap(Explainer):
         plot_type = Dropdown(
             description='Plot:',
             options=['force', 'decision', 'both'],
-            description_tooltip='Which plot to draw, decision or force',
+            description_tooltip='Which plot to draw decision, force or both',
             style=style
         )
         options_map['plot_type'] = plot_type
@@ -231,6 +232,7 @@ class Shap(Explainer):
 
 class ShapFI(Shap):
     resources = {
+        'Documentation': 'https://expybox.readthedocs.io/en/latest/methods/shapFI.html',
         'SHAP paper': 'https://arxiv.org/abs/1705.07874',
         'SHAP in IML book': 'https://christophm.github.io/interpretable-ml-book/shap.html',
         'Documentation of shap': 'https://shap.readthedocs.io/en/latest/#shap.KernelExplainer',
