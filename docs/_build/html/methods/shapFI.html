@@ -85,7 +85,11 @@
 <li class="toctree-l1"><a class="reference internal" href="lime.html">LIME</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anchors.html">Anchors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shap.html">SHAP</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">SHAP Feature Importance</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SHAP Feature Importance</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#method-parameters">Method parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -163,6 +167,27 @@
 </dl>
 </dd></dl>
 
+<div class="section" id="method-parameters">
+<h2>Method parameters<a class="headerlink" href="#method-parameters" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference external" href="https://expybox.readthedocs.io/en/latest/methods/shap.html">shap parameters</a>.</p>
+<p>Additional parameter:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Sample size</dt><dd><p>Number of instances from train data to use for calculating mean shap value for each feature.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/abs/1705.07874">SHAP paper</a></p></li>
+<li><p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/shap.html">SHAP in IML book</a></p></li>
+<li><p><a class="reference external" href="https://shap.readthedocs.io/en/latest/#shap.KernelExplainer">Documentation of shap</a></p></li>
+<li><p><a class="reference external" href="https://github.com/slundberg/shap/blob/master/shap/plots/summary.py#L18">Implementation (currently documentation replacement) of summary plot</a></p></li>
+</ul>
+</div>
 </div>
 
 

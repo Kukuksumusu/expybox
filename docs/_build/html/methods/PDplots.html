@@ -82,7 +82,11 @@
             
               <p class="caption"><span class="caption-text">Methods</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Partial Dependence plot</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Partial Dependence plot</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#method-parameters">Method parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="lime.html">LIME</a></li>
 <li class="toctree-l1"><a class="reference internal" href="anchors.html">Anchors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="shap.html">SHAP</a></li>
@@ -164,6 +168,94 @@
 </dl>
 </dd></dl>
 
+<div class="section" id="method-parameters">
+<h2>Method parameters<a class="headerlink" href="#method-parameters" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="simple">
+<dt>Feature to plot</dt><dd><p>Which feature should be plotted</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Number of grid points</dt><dd><p>Number of grid points to calculate partial dependence value in (for numeric feature)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Grid type</dt><dd><p>Type of grid points for numeric feature (percentile or equal)</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Custom grid range</dt><dd><ul>
+<li><dl>
+<dt>Custom range minimum/maximum</dt><dd><p>Percentile (when <code class="code docutils literal notranslate"><span class="pre">grid_type</span></code> = <code class="code docutils literal notranslate"><span class="pre">percentile</span></code>) or value (when <code class="code docutils literal notranslate"><span class="pre">grid_type</span></code> = <code class="code docutils literal notranslate"><span class="pre">equal</span></code>)
+lower/upper bound of range to investigate (for numeric feature)</p>
+<p>(Enabled only when <code class="code docutils literal notranslate"><span class="pre">Custom</span> <span class="pre">grid</span> <span class="pre">range</span></code> is checked and <code class="code docutils literal notranslate"><span class="pre">Variable</span> <span class="pre">with</span> <span class="pre">grid</span> <span class="pre">points</span></code> is <code class="code docutils literal notranslate"><span class="pre">None</span></code>)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Variable with grid points</dt><dd><p>Name of variable (or None) from <code class="code docutils literal notranslate"><span class="pre">kernel_globals</span></code> with customized list of grid points (list of integers) for numeric feature</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Center the plot</dt><dd><p>Whether the plot should be centered (starting at [0,0])</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Plot data points distribution</dt><dd><p>Whether to display data points distribution below the plot</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Show precentile buckets</dt><dd><p>Whether to show percentile buckets below the plot</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Plot lines - ICE plot</dt><dd><p>Whether to plot also lines for single instances (which makes the plot an ICE plot)</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Lines to plot</dt><dd><p>How many lines to plot, can be a integer or a float</p>
+<ul>
+<li><p>integer values higher than 1 are interpreted as absolute amount</p></li>
+<li><p>floats are interpreted as fraction (e.g. 0.5 means half of all possible lines)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Cluster lines</dt><dd><p>Whether to cluster the lines</p>
+<ul>
+<li><p>Number of cluster centers - Number of cluster centers for lines</p></li>
+<li><p>Cluster method - Method to use for clustering of lines (KMeans or MiniBatchKMeans)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pdpbox.readthedocs.io/en/latest/pdp_isolate.html">Documentation (pdp_isolate)</a></p></li>
+<li><p><a class="reference external" href="https://pdpbox.readthedocs.io/en/latest/pdp_plot.html">Documentation (pdp_plot)</a></p></li>
+<li><p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/pdp.html">Partial Dependence plot</a></p></li>
+<li><p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/ice.html">Individual Conditional Expectation</a></p></li>
+<li><p><a class="reference external" href="https://github.com/SauceCat/PDPbox">PDPbox on GitHub</a></p></li>
+</ul>
+</div>
 </div>
 
 

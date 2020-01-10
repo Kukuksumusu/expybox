@@ -9,6 +9,7 @@ from .explainer import Explainer
 
 class PDP(Explainer):
     resources = {
+        'Documentation': 'https://expybox.readthedocs.io/en/latest/methods/PDplots.html',
         'Documentation (pdp_isolate)': 'https://pdpbox.readthedocs.io/en/latest/pdp_isolate.html',
         'Documentation (pdp_plot)': 'https://pdpbox.readthedocs.io/en/latest/pdp_plot.html',
         'Partial Dependence plot': 'https://christophm.github.io/interpretable-ml-book/pdp.html',

@@ -87,6 +87,7 @@
 <li class="toctree-l1"><a class="reference internal" href="anchors.html">Anchors</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">SHAP</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#method-parameters">Method parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="shapFI.html">SHAP Feature Importance</a></li>
@@ -202,7 +203,44 @@ to connect them to the ouput with a link function where link(outout) = sum(phi).
 </dd>
 </dl>
 </li>
-<li></li>
+<li><dl>
+<dt>Model sample size</dt><dd><p>Number of times to re-evaluate the model when explaining each prediction.</p>
+<p>More samples lead to lower variance estimates of the SHAP values.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Auto choose model sample size</dt><dd><p>The <code class="code docutils literal notranslate"><span class="pre">auto</span></code> setting uses <code class="code docutils literal notranslate"><span class="pre">Model</span> <span class="pre">sample</span> <span class="pre">size</span></code> = 2 * train_data.shape[1] + 2048.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>L1 regularization</dt><dd><p>The l1 regularization to use for feature selection (the estimation procedure is based on a debiased lasso).</p>
+<p>You can choose following inputs:</p>
+<ul class="simple">
+<li><p>The <code class="code docutils literal notranslate"><span class="pre">auto</span></code> option currently uses “aic” when less that 20% of the possible sample space is enumerated, otherwise it uses no regularization.</p></li>
+<li><p>The <code class="code docutils literal notranslate"><span class="pre">aic</span></code> or <code class="code docutils literal notranslate"><span class="pre">bic</span></code> options use the AIC and BIC rules for regularization</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Integer</span></code> selects a fix number of top features</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">float</span></code> directly sets the “alpha” parameter of the sklearn.linear_model.Lasso model used for feature selection</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Class to plot</dt><dd><p>If explaining classification problem, select which class prediction to explain</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://arxiv.org/abs/1705.07874">SHAP paper</a></p></li>
+<li><p><a class="reference external" href="https://christophm.github.io/interpretable-ml-book/shap.html">SHAP in IML book</a></p></li>
+<li><p><a class="reference external" href="https://shap.readthedocs.io/en/latest/#shap.KernelExplainer">Documentation of shap</a></p></li>
+<li><p><a class="reference external" href="https://github.com/slundberg/shap/blob/master/shap/plots/force.py#L31">Implementation (currently documentation replacement) of force plot</a></p></li>
+<li><p><a class="reference external" href="https://github.com/slundberg/shap/blob/master/shap/plots/decision.py#L216">Implementation (currently documentation replacement) of decision plot</a></p></li>
 </ul>
 </div>
 </div>
